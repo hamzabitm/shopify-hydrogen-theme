@@ -11,11 +11,16 @@ import {
 import {ProductPrice} from '~/components/ProductPrice';
 import {ProductImage} from '~/components/ProductImage';
 import {ProductForm} from '~/components/ProductForm';
+import {ProductGallery} from '~/components/ProductGallery';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 
 export const meta: Route.MetaFunction = ({data}) => {
   return [
-    {title: `Hydrogen | ${data?.product.title ?? ''}`},
+    {title: `AODOUR | ${data?.product.title ?? ''} - Premium Luxury Bags`},
+    {
+      name: 'description',
+      content: `${data?.product.title ?? 'Product'} - ${data?.product.description ?? 'Premium quality bag from AODOUR.PK'}`,
+    },
     {
       rel: 'canonical',
       href: `/products/${data?.product.handle}`,
@@ -96,29 +101,76 @@ export default function Product() {
   });
 
   const {title, descriptionHtml} = product;
+  const isAvailable = selectedVariant?.availableForSale;
+  const vendorName = product.vendor;
 
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <div className="product-main">
-        <h1>{title}</h1>
-        <ProductPrice
-          price={selectedVariant?.price}
-          compareAtPrice={selectedVariant?.compareAtPrice}
+    <div className="product-page">
+      <div className="product">
+        <ProductGallery 
+          images={product.images.nodes}
+          title={title}
         />
-        <br />
-        <ProductForm
-          productOptions={productOptions}
-          selectedVariant={selectedVariant}
-        />
-        <br />
-        <br />
-        <p>
-          <strong>Description</strong>
-        </p>
-        <br />
-        <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-        <br />
+        <div className="product-main">
+          {/* Product Header */}
+          <div className="product-header">
+            <h1>{title}</h1>
+            {vendorName && <p className="product-vendor">Brand: {vendorName}</p>}
+          </div>
+          
+          {/* Availability Badge */}
+          {isAvailable ? (
+            <div className="availability-badge available">
+              ✓ In Stock
+            </div>
+          ) : (
+            <div className="availability-badge out-of-stock">
+              Out of Stock
+            </div>
+          )}
+          
+          {/* Price Section */}
+          <div className="price-section">
+            <ProductPrice
+              price={selectedVariant?.price}
+              compareAtPrice={selectedVariant?.compareAtPrice}
+            />
+            {selectedVariant?.sku && (
+              <p className="product-sku">SKU: {selectedVariant.sku}</p>
+            )}
+          </div>
+          
+          <ProductForm
+            productOptions={productOptions}
+            selectedVariant={selectedVariant}
+          />
+          
+          <br />
+          
+          {/* Product Features */}
+          <div className="product-features">
+            <div className="product-feature">
+              <span className="product-feature-icon">✓</span>
+              <span>Authentic Product</span>
+            </div>
+            <div className="product-feature">
+              <span className="product-feature-icon">🚚</span>
+              <span>Free Shipping</span>
+            </div>
+            <div className="product-feature">
+              <span className="product-feature-icon">↻</span>
+              <span>30-Day Returns</span>
+            </div>
+          </div>
+          
+          <br />
+          <p>
+            <strong>Description</strong>
+          </p>
+          <br />
+          <div className="product-description" dangerouslySetInnerHTML={{__html: descriptionHtml}} />
+          <br />
+        </div>
       </div>
       <Analytics.ProductView
         data={{
@@ -186,6 +238,15 @@ const PRODUCT_FRAGMENT = `#graphql
     description
     encodedVariantExistence
     encodedVariantAvailability
+    images(first: 10) {
+      nodes {
+        id
+        url
+        altText
+        width
+        height
+      }
+    }
     options {
       name
       optionValues {

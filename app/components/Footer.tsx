@@ -18,13 +18,93 @@ export function Footer({
       <Await resolve={footerPromise}>
         {(footer) => (
           <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
-              <FooterMenu
-                menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            )}
+            <div className="footer-content">
+              <div className="footer-grid">
+                {/* Brand Section */}
+                <div className="footer-section footer-brand">
+                  <div className="footer-brand-name">AODOUR</div>
+                  <div className="footer-brand-tagline">LUXURY BAGS</div>
+                  <p className="footer-description">
+                    Premium quality bags crafted with attention to detail. 
+                    Discover elegance and functionality in every piece.
+                  </p>
+                  <div className="footer-social">
+                    <a href="https://facebook.com/aodour.pk" className="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                      <span>f</span>
+                    </a>
+                    <a href="https://instagram.com/aodour.pk" className="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                      <span>📷</span>
+                    </a>
+                    <a href="https://twitter.com/aodour_pk" className="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                      <span>🐦</span>
+                    </a>
+                  </div>
+                </div>
+
+                {/* Shop Section */}
+                <div className="footer-section">
+                  <h3>Shop</h3>
+                  <div className="footer-links">
+                    <NavLink to="/collections/womens-bags" className="footer-link">Women's Bags</NavLink>
+                    <NavLink to="/collections/mens-bags" className="footer-link">Men's Bags</NavLink>
+                    <NavLink to="/collections/travel-bags" className="footer-link">Travel Bags</NavLink>
+                    <NavLink to="/collections/accessories" className="footer-link">Accessories</NavLink>
+                    <NavLink to="/collections/sale" className="footer-link">Sale</NavLink>
+                  </div>
+                </div>
+
+                {/* Customer Care */}
+                <div className="footer-section">
+                  <h3>Customer Care</h3>
+                  <div className="footer-links">
+                    <NavLink to="/pages/contact" className="footer-link">Contact Us</NavLink>
+                    <NavLink to="/pages/shipping" className="footer-link">Shipping Info</NavLink>
+                    <NavLink to="/pages/returns" className="footer-link">Returns</NavLink>
+                    <NavLink to="/pages/size-guide" className="footer-link">Size Guide</NavLink>
+                    <NavLink to="/pages/faq" className="footer-link">FAQ</NavLink>
+                  </div>
+                </div>
+
+                {/* About */}
+                <div className="footer-section">
+                  <h3>About</h3>
+                  <div className="footer-links">
+                    <NavLink to="/pages/about" className="footer-link">Our Story</NavLink>
+                    <NavLink to="/pages/quality" className="footer-link">Quality Promise</NavLink>
+                    <NavLink to="/blogs/journal" className="footer-link">Blog</NavLink>
+                    <NavLink to="/pages/careers" className="footer-link">Careers</NavLink>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="footer-bottom">
+                <div className="footer-bottom-content">
+                  <div className="footer-copyright">
+                    © {new Date().getFullYear()} AODOUR.PK. All rights reserved.
+                  </div>
+                  <div className="footer-trust-badges">
+                    <span className="footer-trust-badge">🔒 Secure</span>
+                    <span className="footer-trust-badge">✓ Authentic</span>
+                    <span className="footer-trust-badge">🚚 Free Shipping</span>
+                  </div>
+                  <div className="footer-payment-icons">
+                    <span className="footer-payment-icon">VISA</span>
+                    <span className="footer-payment-icon">MC</span>
+                    <span className="footer-payment-icon">COD</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Policy Menu */}
+              {footer?.menu && header.shop.primaryDomain?.url && (
+                <FooterMenu
+                  menu={footer.menu}
+                  primaryDomainUrl={header.shop.primaryDomain.url}
+                  publicStoreDomain={publicStoreDomain}
+                />
+              )}
+            </div>
           </footer>
         )}
       </Await>

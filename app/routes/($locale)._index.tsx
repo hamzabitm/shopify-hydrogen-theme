@@ -9,7 +9,7 @@ import type {
 import {ProductItem} from '~/components/ProductItem';
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'AODOUR - Premium Luxury Bags | Shop Women\'s & Men\'s Bags'}, {name: 'description', content: 'Discover premium quality bags at AODOUR.PK. Shop luxury handbags, backpacks, travel bags, and accessories crafted with attention to detail.'}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
@@ -60,9 +60,90 @@ export default function Homepage() {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="home">
+      <HeroSection />
+      <FeaturedCategories />
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
+      <TrustSection />
     </div>
+  );
+}
+
+function HeroSection() {
+  return (
+    <div className="hero-section">
+      <div className="hero-content">
+        <h1 className="hero-title">Elegance Meets Functionality</h1>
+        <p className="hero-subtitle">
+          Discover premium quality bags crafted for the modern lifestyle
+        </p>
+        <div className="hero-cta">
+          <Link to="/collections/all" className="btn btn-primary">
+            Shop Now
+          </Link>
+          <Link to="/collections/new-arrivals" className="btn btn-secondary">
+            New Arrivals
+          </Link>
+        </div>
+      </div>
+      <div className="hero-image">
+        <div className="hero-image-placeholder">
+          {/* Hero image would go here */}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FeaturedCategories() {
+  const categories = [
+    {
+      title: "Women's Bags",
+      handle: 'womens-bags',
+      description: 'Elegant handbags & totes',
+      icon: '👜',
+    },
+    {
+      title: "Men's Bags",
+      handle: 'mens-bags',
+      description: 'Professional briefcases',
+      icon: '💼',
+    },
+    {
+      title: 'Travel Bags',
+      handle: 'travel-bags',
+      description: 'Durable luggage & duffels',
+      icon: '🧳',
+    },
+    {
+      title: 'Accessories',
+      handle: 'accessories',
+      description: 'Wallets & small leather goods',
+      icon: '👛',
+    },
+  ];
+
+  return (
+    <section className="featured-categories">
+      <div className="section-header">
+        <h2>Shop By Category</h2>
+        <p>Find the perfect bag for every occasion</p>
+      </div>
+      <div className="categories-grid">
+        {categories.map((category) => (
+          <Link
+            key={category.handle}
+            to={`/collections/${category.handle}`}
+            className="category-card"
+          >
+            <div className="category-icon">{category.icon}</div>
+            <h3>{category.title}</h3>
+            <p>{category.description}</p>
+            <span className="category-link">Shop Now →</span>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -74,17 +155,22 @@ function FeaturedCollection({
   if (!collection) return null;
   const image = collection?.image;
   return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
+    <section className="featured-collection-section">
+      <Link
+        className="featured-collection"
+        to={`/collections/${collection.handle}`}
+      >
+        {image && (
+          <div className="featured-collection-image">
+            <Image data={image} sizes="100vw" />
+          </div>
+        )}
+        <div className="featured-collection-overlay">
+          <h2>{collection.title}</h2>
+          <span className="btn btn-light">Explore Collection</span>
         </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
+      </Link>
+    </section>
   );
 }
 
@@ -94,9 +180,12 @@ function RecommendedProducts({
   products: Promise<RecommendedProductsQuery | null>;
 }) {
   return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
-      <Suspense fallback={<div>Loading...</div>}>
+    <section className="recommended-products">
+      <div className="section-header">
+        <h2>Bestsellers</h2>
+        <p>Our most loved bags</p>
+      </div>
+      <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
         <Await resolve={products}>
           {(response) => (
             <div className="recommended-products-grid">
@@ -109,8 +198,51 @@ function RecommendedProducts({
           )}
         </Await>
       </Suspense>
-      <br />
-    </div>
+      <div className="section-cta">
+        <Link to="/collections/all" className="btn btn-outline">
+          View All Products
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function TrustSection() {
+  const features = [
+    {
+      icon: '✓',
+      title: 'Authentic Products',
+      description: '100% genuine bags',
+    },
+    {
+      icon: '🚚',
+      title: 'Free Shipping',
+      description: 'On orders over Rs. 5000',
+    },
+    {
+      icon: '↻',
+      title: 'Easy Returns',
+      description: '30-day return policy',
+    },
+    {
+      icon: '🔒',
+      title: 'Secure Payment',
+      description: 'Safe & encrypted checkout',
+    },
+  ];
+
+  return (
+    <section className="trust-section">
+      <div className="trust-grid">
+        {features.map((feature, index) => (
+          <div key={index} className="trust-item">
+            <div className="trust-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 

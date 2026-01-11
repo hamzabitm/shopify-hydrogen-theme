@@ -7,7 +7,13 @@ import {ProductItem} from '~/components/ProductItem';
 import type {ProductItemFragment} from 'storefrontapi.generated';
 
 export const meta: Route.MetaFunction = ({data}) => {
-  return [{title: `Hydrogen | ${data?.collection.title ?? ''} Collection`}];
+  return [
+    {title: `AODOUR | ${data?.collection.title ?? 'Collection'} - Luxury Bags`},
+    {
+      name: 'description',
+      content: `${data?.collection.title ?? 'Collection'} - ${data?.collection.description || 'Browse our collection of premium quality bags at AODOUR.PK'}`,
+    },
+  ];
 };
 
 export async function loader(args: Route.LoaderArgs) {

@@ -26,8 +26,11 @@ export function Header({
   const {shop, menu} = header;
   return (
     <header className="header">
-      <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
-        <strong>{shop.name}</strong>
+      <NavLink prefetch="intent" to="/" className="header-logo" end>
+        <div className="header-logo-text">
+          <span className="header-logo-main">AODOUR</span>
+          <span className="header-logo-tagline">LUXURY BAGS</span>
+        </div>
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -179,39 +182,48 @@ const FALLBACK_HEADER_MENU = {
   id: 'gid://shopify/Menu/199655587896',
   items: [
     {
-      id: 'gid://shopify/MenuItem/461609500728',
+      id: 'gid://shopify/MenuItem/1',
       resourceId: null,
       tags: [],
-      title: 'Collections',
+      title: "Women's Bags",
       type: 'HTTP',
-      url: '/collections',
+      url: '/collections/womens-bags',
       items: [],
     },
     {
-      id: 'gid://shopify/MenuItem/461609533496',
+      id: 'gid://shopify/MenuItem/2',
       resourceId: null,
       tags: [],
-      title: 'Blog',
+      title: "Men's Bags",
       type: 'HTTP',
-      url: '/blogs/journal',
+      url: '/collections/mens-bags',
       items: [],
     },
     {
-      id: 'gid://shopify/MenuItem/461609566264',
+      id: 'gid://shopify/MenuItem/3',
       resourceId: null,
       tags: [],
-      title: 'Policies',
+      title: 'Travel Bags',
       type: 'HTTP',
-      url: '/policies',
+      url: '/collections/travel-bags',
       items: [],
     },
     {
-      id: 'gid://shopify/MenuItem/461609599032',
-      resourceId: 'gid://shopify/Page/92591030328',
+      id: 'gid://shopify/MenuItem/4',
+      resourceId: null,
       tags: [],
-      title: 'About',
-      type: 'PAGE',
-      url: '/pages/about',
+      title: 'Accessories',
+      type: 'HTTP',
+      url: '/collections/accessories',
+      items: [],
+    },
+    {
+      id: 'gid://shopify/MenuItem/5',
+      resourceId: null,
+      tags: [],
+      title: 'Sale',
+      type: 'HTTP',
+      url: '/collections/sale',
       items: [],
     },
   ],
@@ -225,7 +237,7 @@ function activeLinkStyle({
   isPending: boolean;
 }) {
   return {
-    fontWeight: isActive ? 'bold' : undefined,
-    color: isPending ? 'grey' : 'black',
+    fontWeight: isActive ? '600' : '500',
+    color: isPending ? 'grey' : isActive ? 'var(--color-primary)' : 'var(--color-text)',
   };
 }
