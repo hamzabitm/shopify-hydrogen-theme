@@ -220,6 +220,155 @@ export const HEADER_QUERY = `#graphql
   ${MENU_FRAGMENT}
 ` as const;
 
+// Product Queries
+export const PRODUCT_FRAGMENT = `#graphql
+  fragment ProductFragment on Product {
+    id
+    title
+    vendor
+    handle
+    description
+    tags
+    images(first: 10) {
+      edges {
+        node {
+          id
+          altText
+          url
+          width
+          height
+        }
+      }
+    }
+    options(first: 10) {
+      id
+      name
+      values
+    }
+    selectedOptions {
+      name
+      value
+    }
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 10) {
+      nodes {
+        id
+        title
+        availableForSale
+        image {
+          url
+          altText
+          width
+          height
+        }
+        priceV2 {
+          amount
+          currencyCode
+        }
+        compareAtPriceV2 {
+          amount
+          currencyCode
+        }
+        selectedOptions {
+          name
+          value
+        }
+      }
+    }
+  }
+` as const;
+
+export const PRODUCTS_QUERY = `#graphql
+  query GetProducts($first: Int!) {
+    products(first: $first) {
+      edges {
+        node {
+          ...ProductFragment
+        }
+      }
+    }
+  }
+  ${PRODUCT_FRAGMENT}
+` as const;
+
+export const PRODUCT_QUERY = `#graphql
+  query GetProduct($handle: String!) {
+    product(handle: $handle) {
+      ...ProductFragment
+      descriptionHtml
+      seo {
+        title
+        description
+      }
+    }
+  }
+  ${PRODUCT_FRAGMENT}
+` as const;
+
+// Collection Queries
+export const COLLECTION_FRAGMENT = `#graphql
+  fragment CollectionFragment on Collection {
+    id
+    title
+    handle
+    description
+    image {
+      url
+      altText
+      width
+      height
+    }
+  }
+` as const;
+
+export const COLLECTIONS_QUERY = `#graphql
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          ...CollectionFragment
+        }
+      }
+    }
+  }
+  ${COLLECTION_FRAGMENT}
+` as const;
+
+export const COLLECTION_PRODUCTS_QUERY = `#graphql
+  query GetCollectionProducts($handle: String!, $first: Int!) {
+    collection(handle: $handle) {
+      ...CollectionFragment
+      products(first: $first) {
+        edges {
+          node {
+            ...ProductFragment
+          }
+        }
+      }
+    }
+  }
+  ${COLLECTION_FRAGMENT}
+  ${PRODUCT_FRAGMENT}
+` as const;
 export const FOOTER_QUERY = `#graphql
   query Footer(
     $country: CountryCode

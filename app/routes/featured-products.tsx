@@ -33,10 +33,10 @@ export default function FeaturedProducts() {
   return (
     <div>
       <CustomProductsSection
-        title={collection.title}
-        subtitle="Discover our latest collection"
+        heading={collection.title}
+        subheading="Discover our latest collection"
         products={collection.products.nodes}
-        viewAllLink={`/collections/${collection.handle}`}
+        collectionUrl={`/collections/${collection.handle}`}
         viewAllText="View all"
         productsPerRow={4}
         showViewAll={true}

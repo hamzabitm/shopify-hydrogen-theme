@@ -5,30 +5,30 @@
   --grid-item-width: 355px;
   --header-height: 80px;
   
-  /* Luxury Dark Theme - Black, Charcoal, Deep Grey */
-  --color-primary: #1a1a1a;
-  --color-primary-light: #2a2a2a;
-  --color-secondary: #3a3a3a;
-  --color-dark: #0f0f0f;
+  /* Modern Light Gadgets Theme */
+  --color-primary: #0f172a; /* slate-900 */
+  --color-primary-light: #1e293b; /* slate-800 */
+  --color-secondary: #334155; /* slate-700 */
+  --color-dark: #0b1220;
   --color-light: #ffffff;
   
-  /* Accent Colors - Subtle Gold & Soft Neon Blue */
-  --color-accent-gold: #d4a574;
-  --color-accent-gold-light: #e8c4a0;
-  --color-accent-gold-dark: #b8824f;
-  --color-accent-blue: #00d9ff;
-  --color-accent-blue-light: #4df9ff;
-  --color-accent-blue-dark: #0088cc;
+  /* Accent Colors - Sky & Cyan */
+  --color-accent-gold: #0ea5e9; /* sky-500 */
+  --color-accent-gold-light: #38bdf8; /* sky-400 */
+  --color-accent-gold-dark: #0369a1; /* sky-700 */
+  --color-accent-blue: #06b6d4; /* cyan-500 */
+  --color-accent-blue-light: #22d3ee; /* cyan-400 */
+  --color-accent-blue-dark: #0e7490; /* cyan-700 */
   
-  /* Text Colors for Dark Theme */
-  --color-text: #f5f5f5;
-  --color-text-secondary: #cccccc;
-  --color-text-muted: #999999;
-  --color-border: #404040;
-  --color-border-light: #505050;
-  --color-bg-dark: #0f0f0f;
-  --color-bg-light: #1a1a1a;
-  --color-bg-lighter: #2a2a2a;
+  /* Text Colors */
+  --color-text: #0f172a; /* slate-900 */
+  --color-text-secondary: #475569; /* slate-600 */
+  --color-text-muted: #64748b; /* slate-500 */
+  --color-border: #e2e8f0; /* slate-200 */
+  --color-border-light: #cbd5e1; /* slate-300 */
+  --color-bg-dark: #f8fafc; /* slate-50 */
+  --color-bg-light: #ffffff;
+  --color-bg-lighter: #f1f5f9; /* slate-100 */
   
   /* Status Colors */
   --color-success: #10b981;
@@ -36,19 +36,19 @@
   --color-warning: #f59e0b;
   
   /* Card & Product Design */
-  --card-bg: #1a1a1a;
-  --card-bg-hover: #2a2a2a;
-  --card-border: #404040;
-  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-  --card-shadow-hover: 0 12px 32px rgba(212, 165, 116, 0.15);
-  --price-primary: #ffffff;
-  --price-secondary: #cccccc;
-  --sale-price-bg: #ef4444;
+  --card-bg: #ffffff;
+  --card-bg-hover: #f8fafc;
+  --card-border: #e2e8f0;
+  --card-shadow: 0 4px 16px rgba(2, 6, 23, 0.06);
+  --card-shadow-hover: 0 16px 40px rgba(2, 6, 23, 0.10);
+  --price-primary: #0f172a;
+  --price-secondary: #475569;
+  --sale-price-bg: #0ea5e9;
   --sale-price-color: #fff;
   
   /* Typography */
-  --font-heading: 'SF Pro Display', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
   
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -90,7 +90,10 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   line-height: 1.6;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  background:
+    radial-gradient(900px circle at 20% 10%, rgba(14, 165, 233, 0.14) 0%, transparent 45%),
+    radial-gradient(900px circle at 80% 20%, rgba(34, 211, 238, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
   min-height: 100vh;
 }
 
@@ -101,9 +104,9 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(212, 165, 116, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.03) 0%, transparent 50%);
+  background:
+    radial-gradient(circle at 30% 60%, rgba(14, 165, 233, 0.06) 0%, transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 55%);
   pointer-events: none;
   z-index: -1;
 }
@@ -138,7 +141,7 @@ section:nth-child(even) {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  color: var(--color-light);
+  color: var(--color-primary);
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.5px;
@@ -182,16 +185,16 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-lighter);
+  background: var(--color-bg-light);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
+  background: var(--color-accent-gold);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0891b2;
+  background: var(--color-accent-gold-light);
 }
 
 img {
@@ -209,7 +212,7 @@ select {
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-light);
+  background: var(--color-bg-light);
   color: var(--color-text);
   transition: all var(--transition-fast);
 }
@@ -218,8 +221,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--color-secondary);
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+  border-color: var(--color-accent-gold);
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
 }
 
 input:disabled,
@@ -232,18 +235,18 @@ select:disabled {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-text-light);
+  color: var(--color-text-muted);
 }
 
 a {
-  color: var(--color-secondary);
+  color: var(--color-accent-gold);
   text-decoration: none;
   transition: all var(--transition-fast);
   position: relative;
 }
 
 a:hover {
-  color: #0891b2;
+  color: var(--color-accent-gold-light);
 }
 
 a[href^="/"]:not(.btn):not(.header-menu-item)::after {
@@ -253,7 +256,7 @@ a[href^="/"]:not(.btn):not(.header-menu-item)::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-secondary);
+  background: var(--color-accent-gold);
   transition: width var(--transition-fast);
 }
 
@@ -272,7 +275,7 @@ button {
 }
 
 button:focus {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--color-accent-gold);
   outline-offset: 2px;
 }
 
@@ -298,36 +301,38 @@ button:disabled {
 }
 
 .btn-primary {
-  background: var(--color-secondary);
-  color: #fff;
-  box-shadow: var(--shadow-md);
+  background: var(--color-accent-gold);
+  color: #0f0f0f;
+  box-shadow: 0 4px 16px rgba(212, 165, 116, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #0891b2;
-  box-shadow: var(--shadow-lg);
+  background: var(--color-accent-gold-light);
+  box-shadow: 0 8px 24px rgba(212, 165, 116, 0.4);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--color-secondary);
-  border: 2px solid var(--color-secondary);
+  color: var(--color-accent-gold);
+  border: 2px solid var(--color-accent-gold);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--color-secondary);
-  color: #fff;
+  background: rgba(212, 165, 116, 0.1);
+  color: var(--color-accent-gold-light);
+  border-color: var(--color-accent-gold-light);
 }
 
 .btn-dark {
-  background: var(--color-primary);
-  color: #fff;
-  box-shadow: var(--shadow-md);
+  background: var(--color-bg-lighter);
+  color: var(--color-accent-gold);
+  border: 2px solid var(--color-accent-gold);
 }
 
 .btn-dark:hover:not(:disabled) {
-  background: #0f172a;
+  background: var(--color-accent-gold);
+  color: #0f0f0f;
   box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
 }
