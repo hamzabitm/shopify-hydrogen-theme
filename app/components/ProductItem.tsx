@@ -228,22 +228,6 @@ export const ProductItem = memo(function ProductItem({
         aria-label={product.title ? `View ${product.title}` : 'View product'}
         className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
       >
-        {ratingValue != null || (hasDiscount && salePercent != null) ? (
-          <div className="mb-2 flex items-center gap-2">
-            {ratingValue != null ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">
-                <Star size={14} className="text-brand-neon" fill="currentColor" />
-                {ratingValue.toFixed(1)}
-              </span>
-            ) : null}
-            {hasDiscount && salePercent != null ? (
-              <span className="inline-flex items-center rounded-full bg-brand-neon px-3 py-1 text-[11px] font-extrabold tracking-wide text-slate-950 shadow-glow-blue">
-                {salePercent}% OFF
-              </span>
-            ) : null}
-          </div>
-        ) : null}
-
         <div className="relative rounded-xl aspect-square mb-3 overflow-hidden bg-black/20 ring-1 ring-white/10 transition-colors duration-300 group-hover:ring-white/20">
           <div className="absolute left-2.5 top-11 z-[1] flex flex-col gap-2">
             {subtitle ? (
@@ -277,6 +261,22 @@ export const ProductItem = memo(function ProductItem({
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
           </div>
         </div>
+
+        {ratingValue != null || (hasDiscount && salePercent != null) ? (
+          <div className="mb-2 flex items-center gap-2">
+            {ratingValue != null ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">
+                <Star size={14} className="text-brand-neon" fill="currentColor" />
+                {ratingValue.toFixed(1)}
+              </span>
+            ) : null}
+            {hasDiscount && salePercent != null ? (
+              <span className="inline-flex items-center rounded-full bg-brand-neon px-3 py-1 text-[11px] font-extrabold tracking-wide text-slate-950 shadow-glow-blue">
+                {salePercent}% OFF
+              </span>
+            ) : null}
+          </div>
+        ) : null}
 
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
