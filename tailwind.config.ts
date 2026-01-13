@@ -43,6 +43,9 @@ export default {
           cyan: '#06b6d4',
           'cyan-light': '#22d3ee',
           'cyan-dark': '#0e7490',
+          neon: '#00d9ff',
+          'neon-light': '#22d3ee',
+          'neon-dark': '#0891b2',
         },
 
         // Text tokens used by some components (e.g. text-text-secondary)
@@ -89,7 +92,34 @@ export default {
         },
       },
       fontFamily: {
+        body: [
+          'Nova Square',
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        heading: [
+          'Audiowide',
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
         sans: [
+          'Nova Square',
           'Inter',
           'ui-sans-serif',
           'system-ui',
@@ -102,6 +132,7 @@ export default {
           'sans-serif',
         ],
         display: [
+          'Audiowide',
           'Inter',
           'ui-sans-serif',
           'system-ui',

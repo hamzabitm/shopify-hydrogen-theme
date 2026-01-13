@@ -111,12 +111,63 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
     id
     handle
     title
+    compareAtPriceRange {
+      minVariantPrice {
+        ...MoneyProductItem
+      }
+    }
     featuredImage {
       id
       altText
       url
       width
       height
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      title
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      price {
+        ...MoneyProductItem
+      }
+      compareAtPrice {
+        ...MoneyProductItem
+      }
+    }
+    variants(first: 12) {
+      nodes {
+        id
+        title
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+        price {
+          ...MoneyProductItem
+        }
+        compareAtPrice {
+          ...MoneyProductItem
+        }
+      }
     }
     priceRange {
       minVariantPrice {

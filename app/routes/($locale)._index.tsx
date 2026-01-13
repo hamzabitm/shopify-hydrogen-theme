@@ -12,9 +12,17 @@ import {TestimonialCard} from '~/components/TestimonialCard';
 import {InstagramFeed} from '~/components/InstagramFeed';
 import {NewsletterSignup} from '~/components/NewsletterSignup';
 import {BrandStory} from '~/components/BrandStory';
+import {TrustBar} from '~/components/TrustBar';
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: 'AODOUR - Premium Luxury Bags | Shop Women\'s & Men\'s Bags'}, {name: 'description', content: 'Discover premium quality bags at AODOUR.PK. Shop luxury handbags, backpacks, travel bags, and accessories crafted with attention to detail.'}];
+  return [
+    {title: 'Premium Gadgets Store | Graphite Luxury + Neon Tech'},
+    {
+      name: 'description',
+      content:
+        'Shop premium gadgets with a clean, modern experience. Best sellers, new arrivals, fast shipping, easy returns, and warranty included.',
+    },
+  ];
 };
 
 export async function loader(args: Route.LoaderArgs) {
@@ -82,38 +90,26 @@ export default function Homepage() {
   return (
     <div className="home">
       <HeroSlideshow />
-      <QuickFeaturesBar />
-      <ShopByCategory collections={data.allCollections} />
-      <FeaturedCollectionBanner collection={data.featuredCollection} />
+      <TrustSection />
       <BestSellers products={data.bestSellingProducts} />
       <NewArrivals products={data.newArrivals} />
+      <ShopByCategory collections={data.allCollections} />
+      <FeaturedCollectionBanner collection={data.featuredCollection} />
       <BrandStory />
       <CollectionSpotlight collections={data.allCollections} />
       <CustomerTestimonials />
       <InstagramFeed />
-      <WhyChooseAodour />
+      <WhyChooseUs />
       <NewsletterSignup />
     </div>
   );
 }
 
-function QuickFeaturesBar() {
-  const features = [
-    {icon: '✓', title: 'Authentic Products'},
-    {icon: '🚚', title: 'Free Shipping'},
-    {icon: '↻', title: '30-Day Returns'},
-    {icon: '🔒', title: 'Secure Payment'},
-  ];
-
+function TrustSection() {
   return (
-    <section className="quick-features-bar">
-      <div className="quick-features-grid">
-        {features.map((feature, index) => (
-          <div key={index} className="quick-feature-item">
-            <span className="quick-feature-icon">{feature.icon}</span>
-            <span className="quick-feature-title">{feature.title}</span>
-          </div>
-        ))}
+    <section className="px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-[1200px] mx-auto">
+        <TrustBar />
       </div>
     </section>
   );
@@ -126,7 +122,7 @@ function ShopByCategory({collections}: {collections: any[]}) {
     <section className="shop-by-category">
       <div className="section-header">
         <h2>Shop By Category</h2>
-        <p>Find the perfect bag for every occasion</p>
+        <p>Find the perfect gadget for every moment</p>
       </div>
       <div className="categories-grid">
         {displayCollections.map((collection) => (
@@ -183,7 +179,7 @@ function BestSellers({products}: {products: Promise<any>}) {
     <section className="best-sellers-section">
       <div className="section-header">
         <h2>Best Sellers</h2>
-        <p>Our most loved bags this season</p>
+        <p>Our most-loved tech this season</p>
       </div>
       <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
         <Await resolve={products}>
@@ -212,7 +208,7 @@ function NewArrivals({products}: {products: Promise<any>}) {
     <section className="new-arrivals-section">
       <div className="section-header">
         <h2>New Arrivals</h2>
-        <p>Discover our latest collection</p>
+        <p>Fresh drops, modern essentials</p>
       </div>
       <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
         <Await resolve={products}>
@@ -306,45 +302,45 @@ function CustomerTestimonials() {
   );
 }
 
-function WhyChooseAodour() {
+function WhyChooseUs() {
   const reasons = [
     {
-      icon: '🎨',
-      title: 'Timeless Design',
-      description: 'Classic styles that never go out of fashion',
+      icon: '⚡',
+      title: 'Latest Tech',
+      description: 'Curated gadgets built for daily performance',
     },
     {
       icon: '✨',
-      title: 'Premium Quality',
-      description: 'Handcrafted with the finest materials',
+      title: 'Premium Build',
+      description: 'High-quality materials and reliable engineering',
     },
     {
       icon: '🌱',
-      title: 'Sustainable',
-      description: 'Ethically sourced and eco-friendly production',
+      title: 'Responsible Choices',
+      description: 'Thoughtful options that last longer',
     },
     {
       icon: '💎',
-      title: 'Attention to Detail',
-      description: 'Every stitch, every seam perfected',
+      title: 'Detail Focused',
+      description: 'Specs and features that matter, clearly explained',
     },
     {
       icon: '🛡️',
-      title: 'Lifetime Quality',
-      description: 'Built to last for years to come',
+      title: 'Warranty Included',
+      description: 'Confidence with every purchase',
     },
     {
-      icon: '💝',
-      title: 'Gift Ready',
-      description: 'Elegant packaging for special occasions',
+      icon: '🚚',
+      title: 'Fast Shipping',
+      description: 'Tracked delivery and smooth checkout',
     },
   ];
 
   return (
     <section className="why-choose-section">
       <div className="section-header">
-        <h2>Why Choose AODOUR</h2>
-        <p>More than just bags—a commitment to excellence</p>
+        <h2>Why Choose Us</h2>
+        <p>Premium tech, fast delivery, and peace of mind</p>
       </div>
       <div className="why-choose-grid">
         {reasons.map((reason, index) => (
@@ -410,6 +406,12 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
     id
     title
     handle
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     priceRange {
       minVariantPrice {
         amount
@@ -422,6 +424,56 @@ const RECOMMENDED_PRODUCTS_QUERY = `#graphql
       altText
       width
       height
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      title
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 12) {
+      nodes {
+        id
+        title
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+        price {
+          amount
+          currencyCode
+        }
+        compareAtPrice {
+          amount
+          currencyCode
+        }
+      }
     }
   }
   query RecommendedProducts ($country: CountryCode, $language: LanguageCode)
@@ -439,6 +491,12 @@ const BEST_SELLING_PRODUCTS_QUERY = `#graphql
     id
     title
     handle
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     priceRange {
       minVariantPrice {
         amount
@@ -451,6 +509,56 @@ const BEST_SELLING_PRODUCTS_QUERY = `#graphql
       altText
       width
       height
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      title
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 12) {
+      nodes {
+        id
+        title
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+        price {
+          amount
+          currencyCode
+        }
+        compareAtPrice {
+          amount
+          currencyCode
+        }
+      }
     }
   }
   query BestSellingProducts($country: CountryCode, $language: LanguageCode)
@@ -468,6 +576,12 @@ const NEW_ARRIVALS_QUERY = `#graphql
     id
     title
     handle
+    compareAtPriceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     priceRange {
       minVariantPrice {
         amount
@@ -480,6 +594,56 @@ const NEW_ARRIVALS_QUERY = `#graphql
       altText
       width
       height
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      title
+      availableForSale
+      selectedOptions {
+        name
+        value
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 12) {
+      nodes {
+        id
+        title
+        availableForSale
+        selectedOptions {
+          name
+          value
+        }
+        image {
+          id
+          url
+          altText
+          width
+          height
+        }
+        price {
+          amount
+          currencyCode
+        }
+        compareAtPrice {
+          amount
+          currencyCode
+        }
+      }
     }
   }
   query NewArrivals($country: CountryCode, $language: LanguageCode)

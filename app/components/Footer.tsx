@@ -1,6 +1,7 @@
 import {Suspense} from 'react';
 import {Await, NavLink} from 'react-router';
 import type {FooterQuery, HeaderQuery} from 'storefrontapi.generated';
+import {TrustBar} from '~/components/TrustBar';
 
 interface FooterProps {
   footer: Promise<FooterQuery | null>;
@@ -45,8 +46,8 @@ export function Footer({
                 <div className="footer-section">
                   <h3>Shop</h3>
                   <div className="footer-links">
-                    <NavLink to="/collections/womens-bags" className="footer-link">Women's Bags</NavLink>
-                    <NavLink to="/collections/mens-bags" className="footer-link">Men's Bags</NavLink>
+                    <NavLink to="/collections/womens-bags" className="footer-link">Women&apos;s Bags</NavLink>
+                    <NavLink to="/collections/mens-bags" className="footer-link">Men&apos;s Bags</NavLink>
                     <NavLink to="/collections/travel-bags" className="footer-link">Travel Bags</NavLink>
                     <NavLink to="/collections/accessories" className="footer-link">Accessories</NavLink>
                     <NavLink to="/collections/sale" className="footer-link">Sale</NavLink>
@@ -83,10 +84,8 @@ export function Footer({
                   <div className="footer-copyright">
                     © {new Date().getFullYear()} AODOUR.PK. All rights reserved.
                   </div>
-                  <div className="footer-trust-badges">
-                    <span className="footer-trust-badge">🔒 Secure</span>
-                    <span className="footer-trust-badge">✓ Authentic</span>
-                    <span className="footer-trust-badge">🚚 Free Shipping</span>
+                  <div className="w-full max-w-[520px]">
+                    <TrustBar compact />
                   </div>
                   <div className="footer-payment-icons">
                     <span className="footer-payment-icon">VISA</span>

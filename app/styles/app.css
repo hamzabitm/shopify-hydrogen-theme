@@ -5,30 +5,33 @@
   --grid-item-width: 355px;
   --header-height: 80px;
   
-  /* Modern Light Gadgets Theme */
-  --color-primary: #0f172a; /* slate-900 */
-  --color-primary-light: #1e293b; /* slate-800 */
-  --color-secondary: #334155; /* slate-700 */
-  --color-dark: #0b1220;
-  --color-light: #ffffff;
+  /* Graphite (luxury) + Neon (tech) theme */
+  --color-primary: #f8fafc; /* near-white text */
+  --color-primary-light: #e2e8f0;
+  --color-primary-dark: #cbd5e1;
+  --color-secondary: #a5b4fc; /* subtle cool highlight */
+  --color-dark: #05070a; /* deepest surface */
+  --color-light: #0b0f14; /* main surface (kept name for compatibility) */
+
+  /* Accent Colors (kept var names for compatibility) */
+  --color-accent: #00d9ff;
+  --color-accent-gold: #00d9ff;
+  --color-accent-gold-light: #22d3ee;
+  --color-accent-gold-dark: #0891b2;
+  --color-accent-blue: #00d9ff;
+  --color-accent-blue-light: #22d3ee;
+  --color-accent-blue-dark: #0891b2;
   
-  /* Accent Colors - Sky & Cyan */
-  --color-accent-gold: #0ea5e9; /* sky-500 */
-  --color-accent-gold-light: #38bdf8; /* sky-400 */
-  --color-accent-gold-dark: #0369a1; /* sky-700 */
-  --color-accent-blue: #06b6d4; /* cyan-500 */
-  --color-accent-blue-light: #22d3ee; /* cyan-400 */
-  --color-accent-blue-dark: #0e7490; /* cyan-700 */
-  
-  /* Text Colors */
-  --color-text: #0f172a; /* slate-900 */
-  --color-text-secondary: #475569; /* slate-600 */
-  --color-text-muted: #64748b; /* slate-500 */
-  --color-border: #e2e8f0; /* slate-200 */
-  --color-border-light: #cbd5e1; /* slate-300 */
-  --color-bg-dark: #f8fafc; /* slate-50 */
-  --color-bg-light: #ffffff;
-  --color-bg-lighter: #f1f5f9; /* slate-100 */
+  /* Text + borders */
+  --color-text: #f8fafc;
+  --color-text-secondary: rgba(248, 250, 252, 0.78);
+  --color-text-muted: rgba(248, 250, 252, 0.6);
+  --color-text-light: rgba(248, 250, 252, 0.72);
+  --color-border: rgba(148, 163, 184, 0.18);
+  --color-border-light: rgba(148, 163, 184, 0.28);
+  --color-bg-dark: #05070a;
+  --color-bg-light: #0b0f14;
+  --color-bg-lighter: #101722;
   
   /* Status Colors */
   --color-success: #10b981;
@@ -36,19 +39,19 @@
   --color-warning: #f59e0b;
   
   /* Card & Product Design */
-  --card-bg: #ffffff;
-  --card-bg-hover: #f8fafc;
-  --card-border: #e2e8f0;
-  --card-shadow: 0 4px 16px rgba(2, 6, 23, 0.06);
-  --card-shadow-hover: 0 16px 40px rgba(2, 6, 23, 0.10);
-  --price-primary: #0f172a;
-  --price-secondary: #475569;
-  --sale-price-bg: #0ea5e9;
-  --sale-price-color: #fff;
+  --card-bg: rgba(16, 23, 34, 0.85);
+  --card-bg-hover: rgba(16, 23, 34, 0.95);
+  --card-border: rgba(148, 163, 184, 0.16);
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --price-primary: #f8fafc;
+  --price-secondary: rgba(248, 250, 252, 0.72);
+  --sale-price-bg: #00d9ff;
+  --sale-price-color: #001018;
   
   /* Typography */
-  --font-heading: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: 'Audiowide', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Nova Square', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
   
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -84,6 +87,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-body);
 }
 
 body {
@@ -91,9 +95,9 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   background:
-    radial-gradient(900px circle at 20% 10%, rgba(14, 165, 233, 0.14) 0%, transparent 45%),
-    radial-gradient(900px circle at 80% 20%, rgba(34, 211, 238, 0.12) 0%, transparent 45%),
-    linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    radial-gradient(900px circle at 20% 10%, rgba(0, 217, 255, 0.10) 0%, transparent 40%),
+    radial-gradient(800px circle at 85% 18%, rgba(34, 211, 238, 0.07) 0%, transparent 42%),
+    linear-gradient(180deg, #05070a 0%, #0b0f14 55%, #0b0f14 100%);
   min-height: 100vh;
 }
 
@@ -105,8 +109,8 @@ body::before {
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 30% 60%, rgba(14, 165, 233, 0.06) 0%, transparent 55%),
-    radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.05) 0%, transparent 55%);
+    radial-gradient(circle at 30% 60%, rgba(0, 217, 255, 0.05) 0%, transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(34, 211, 238, 0.04) 0%, transparent 55%);
   pointer-events: none;
   z-index: -1;
 }
@@ -114,11 +118,11 @@ body::before {
 /* Section Wrapper Styles */
 section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: var(--color-bg-dark);
+  background: transparent;
 }
 
 section:nth-child(even) {
-  background: var(--color-bg-light);
+  background: transparent;
 }
 
 @media (min-width: 768px) {
@@ -185,16 +189,16 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-light);
+  background: var(--color-bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-accent-gold);
+  background: rgba(0, 217, 255, 0.55);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-gold-light);
+  background: rgba(0, 217, 255, 0.8);
 }
 
 img {
@@ -212,7 +216,7 @@ select {
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: var(--color-bg-light);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--color-text);
   transition: all var(--transition-fast);
 }
@@ -221,8 +225,8 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: var(--color-accent-gold);
-  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.2);
+  border-color: rgba(0, 217, 255, 0.75);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.18);
 }
 
 input:disabled,

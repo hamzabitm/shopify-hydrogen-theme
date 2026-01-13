@@ -5,10 +5,8 @@ export function Newsletter() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // In a real implementation, send email to your newsletter service
-    console.log('Newsletter signup:', email);
     setSubmitted(true);
     setTimeout(() => {
       setEmail('');

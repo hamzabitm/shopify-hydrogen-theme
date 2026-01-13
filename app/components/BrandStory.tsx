@@ -22,14 +22,14 @@ export function BrandStory() {
           </p>
           <p>
             Our commitment to quality and sustainability drives everything we
-            do. We believe that luxury shouldn't come at the cost of our planet,
+            do. We believe that luxury shouldn&apos;t come at the cost of our planet,
             which is why we partner with ethical suppliers and use eco-friendly
             production methods.
           </p>
           <p>
             Every AODOUR bag tells a story of dedication, artistry, and the
-            pursuit of perfection. When you carry an AODOUR bag, you're not just
-            carrying an accessory—you're carrying a piece of art.
+            pursuit of perfection. When you carry an AODOUR bag, you&apos;re not just
+            carrying an accessory—you&apos;re carrying a piece of art.
           </p>
           <a href="/pages/about-us" className="brand-story-link">
             Learn More About Us →
