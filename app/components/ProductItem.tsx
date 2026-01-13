@@ -188,6 +188,15 @@ export const ProductItem = memo(function ProductItem({
     [variants],
   );
 
+  const showVariantPicker = useMemo(() => {
+    if (variants.length <= 1) return false;
+    const allDefaultTitle = variants.every((v: any) => {
+      const title = String(v?.title ?? '').trim().toLowerCase();
+      return title === '' || title === 'default title';
+    });
+    return !allDefaultTitle;
+  }, [variants]);
+
   const { visibleVariants, hiddenCount } = useMemo(() => {
     if (showAllVariants) {
       return { visibleVariants: variants, hiddenCount: 0 };
@@ -219,8 +228,8 @@ export const ProductItem = memo(function ProductItem({
         aria-label={product.title ? `View ${product.title}` : 'View product'}
         className="block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
       >
-        <div className="relative rounded-xl aspect-square mb-3 overflow-hidden bg-black/20 ring-1 ring-white/10 transition-colors duration-300 group-hover:ring-white/20">
-          <div className="absolute left-2.5 top-2.5 z-[1] flex items-center gap-2">
+        {ratingValue != null || (hasDiscount && salePercent != null) ? (
+          <div className="mb-2 flex items-center gap-2">
             {ratingValue != null ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-black/35 px-2.5 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/15 backdrop-blur">
                 <Star size={14} className="text-brand-neon" fill="currentColor" />
@@ -233,7 +242,9 @@ export const ProductItem = memo(function ProductItem({
               </span>
             ) : null}
           </div>
+        ) : null}
 
+        <div className="relative rounded-xl aspect-square mb-3 overflow-hidden bg-black/20 ring-1 ring-white/10 transition-colors duration-300 group-hover:ring-white/20">
           <div className="absolute left-2.5 top-11 z-[1] flex flex-col gap-2">
             {subtitle ? (
               <span className="inline-flex w-fit items-center rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/20 backdrop-blur">
@@ -310,7 +321,7 @@ export const ProductItem = memo(function ProductItem({
         </div>
       </Link>
 
-      {variants.length > 0 ? (
+      {showVariantPicker ? (
         <div className="mt-3">
           <div className="flex items-center gap-2 overflow-x-auto flex-wrap whitespace-nowrap pb-1">
             {visibleVariants.map((v: any) => {
@@ -327,6 +338,13 @@ export const ProductItem = memo(function ProductItem({
                   .filter(Boolean)[0]
                   ?.slice(0, 14)
                 : undefined;
+
+              if (!hasColorVariants) {
+                const normalized = String(label ?? '').trim().toLowerCase();
+                if (!normalized || normalized === 'default title') return null;
+              } else if (!colorValue) {
+                return null;
+              }
 
               return (
                 <button
@@ -362,7 +380,7 @@ export const ProductItem = memo(function ProductItem({
                   {hasColorVariants ? (
                     <span className="sr-only">{colorValue ?? 'Color'}</span>
                   ) : (
-                    label || 'Variant'
+                    label
                   )}
                 </button>
               );
@@ -409,7 +427,7 @@ export const ProductItem = memo(function ProductItem({
               className="group flex-1 h-11 bg-brand-neon hover:bg-brand-neon-light text-slate-950 font-extrabold px-4 rounded-xl inline-flex items-center justify-center gap-2 shadow-glow-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black active:translate-y-[1px]"
               ariaLabel={product.title ? `Add ${product.title} to cart` : 'Add to cart'}
             >
-              <span>Add</span>
+              <span>Add Cart</span>
               <span className="hidden sm:inline-flex opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 <ShoppingBag size={18} />
               </span>
@@ -431,7 +449,7 @@ export const ProductItem = memo(function ProductItem({
           <button
             type="button"
             disabled
-            className="h-11 w-11 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
+            className="h-8 w-8 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
             aria-label="Quick view (coming soon)"
             title="Quick view (coming soon)"
           >
@@ -441,7 +459,7 @@ export const ProductItem = memo(function ProductItem({
           <button
             type="button"
             disabled
-            className="h-11 w-11 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
+            className="h-8 w-8 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
             aria-label="Wishlist (coming soon)"
             title="Wishlist (coming soon)"
           >
@@ -451,7 +469,7 @@ export const ProductItem = memo(function ProductItem({
           <button
             type="button"
             disabled
-            className="h-11 w-11 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
+            className="h-8 w-8 inline-flex items-center justify-center rounded-xl bg-white/5 text-white/60 ring-1 ring-white/10 opacity-50 cursor-not-allowed"
             aria-label="Compare (coming soon)"
             title="Compare (coming soon)"
           >
