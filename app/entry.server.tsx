@@ -19,8 +19,11 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
-    styleSrc: ['https://fonts.googleapis.com'],
-    fontSrc: ['https://fonts.gstatic.com'],
+    styleSrc: ['https://fonts.googleapis.com', 'https://cdnwidget.judge.me'],
+    fontSrc: ['https://fonts.gstatic.com', 'https://cdnwidget.judge.me'],
+    scriptSrc: ['https://cdnwidget.judge.me'],
+    connectSrc: ['https://cache.judge.me', 'https://judge.me'],
+    imgSrc: ['https://cdnwidget.judge.me', 'https://cache.judge.me', 'https://judge.me', 'data:'],
   });
 
   const body = await renderToReadableStream(

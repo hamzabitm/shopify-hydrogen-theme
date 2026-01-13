@@ -103,6 +103,8 @@ export default function Product() {
   const {title, descriptionHtml} = product;
   const isAvailable = selectedVariant?.availableForSale;
   const vendorName = product.vendor;
+  const productId = String(product.id);
+  const judgemeProductId = productId.match(/\/(\d+)$/)?.[1] ?? productId;
 
   return (
     <div className="product-page">
@@ -115,6 +117,10 @@ export default function Product() {
           {/* Product Header */}
           <div className="product-header">
             <h1>{title}</h1>
+            <div
+              className="jdgm-widget jdgm-preview-badge"
+              data-id={judgemeProductId}
+            />
             {vendorName && <p className="product-vendor">Brand: {vendorName}</p>}
           </div>
           
@@ -170,6 +176,13 @@ export default function Product() {
           <br />
           <div className="product-description" dangerouslySetInnerHTML={{__html: descriptionHtml}} />
           <br />
+
+          <div className="mt-10">
+            <div
+              className="jdgm-widget jdgm-review-widget"
+              data-id={judgemeProductId}
+            />
+          </div>
         </div>
       </div>
       <Analytics.ProductView

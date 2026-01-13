@@ -17,6 +17,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from './components/PageLayout';
+import {JudgeMeReload} from './components/JudgeMeReload';
 
 export type RootLoader = typeof loader;
 
@@ -88,6 +89,10 @@ export async function loader(args: Route.LoaderArgs) {
 
   const {storefront, env} = args.context;
 
+  const judgemeShopDomain =
+    (env as any).PUBLIC_JUDGEME_SHOP_DOMAIN ?? env.PUBLIC_STORE_DOMAIN;
+  const judgemePublicToken = (env as any).PUBLIC_JUDGEME_PUBLIC_TOKEN ?? '';
+
   return {
     ...deferredData,
     ...criticalData,
@@ -103,6 +108,10 @@ export async function loader(args: Route.LoaderArgs) {
       // localize the privacy banner
       country: args.context.storefront.i18n.country,
       language: args.context.storefront.i18n.language,
+    },
+    judgeme: {
+      shopDomain: judgemeShopDomain,
+      publicToken: judgemePublicToken,
     },
   };
 }
@@ -157,6 +166,11 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
 export function Layout({children}: {children?: React.ReactNode}) {
   const nonce = useNonce();
+  const data = useRouteLoaderData<RootLoader>('root');
+
+  const judgemeShopDomain = data?.judgeme?.shopDomain;
+  const judgemePublicToken = data?.judgeme?.publicToken;
+  const enableJudgeMe = Boolean(judgemeShopDomain && judgemePublicToken);
 
   return (
     <html lang="en">
@@ -166,6 +180,24 @@ export function Layout({children}: {children?: React.ReactNode}) {
         <link rel="stylesheet" href={tailwindCss}></link>
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        {enableJudgeMe ? (
+          <>
+            <script
+              nonce={nonce}
+              // Judge.me requires these globals before loading the widget preloader
+              dangerouslySetInnerHTML={{
+                __html: `window.jdgm=window.jdgm||{};window.jdgm.PLATFORM="shopify";window.jdgm.SHOP_DOMAIN=${JSON.stringify(
+                  judgemeShopDomain,
+                )};window.jdgm.PUBLIC_TOKEN=${JSON.stringify(judgemePublicToken)};`,
+              }}
+            />
+            <script
+              nonce={nonce}
+              defer
+              src="https://cdnwidget.judge.me/widget_preloader.js"
+            />
+          </>
+        ) : null}
         <Meta />
         <Links />
       </head>
@@ -191,6 +223,7 @@ export default function App() {
       shop={data.shop}
       consent={data.consent}
     >
+      <JudgeMeReload />
       <PageLayout {...data}>
         <Outlet />
       </PageLayout>
