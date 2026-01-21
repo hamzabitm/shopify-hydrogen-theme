@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
-import {X, Plus, Minus} from 'lucide-react';
+import {X, Plus, Minus, Loader2} from 'lucide-react';
 
 type CartLine = OptimisticCartLine<CartApiQueryFragment>;
 
@@ -25,12 +25,19 @@ export function CartLineItem({
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
   const {close} = useAside();
+  const isUpdating = Boolean(line.isOptimistic);
 
   return (
     <li
       key={id}
-      className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/10 hover:border-brand-neon/30 transition-all duration-300 p-3 hover:bg-gradient-to-br hover:from-white/15 hover:via-white/10 hover:to-white/15"
+      className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/10 hover:border-brand-neon/30 transition-all duration-300 p-3 hover:bg-gradient-to-br hover:from-white/15 hover:via-white/10 hover:to-white/15 shadow-lg shadow-black/10"
     >
+      {isUpdating && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center gap-2 bg-black/30 backdrop-blur-sm text-xs text-white/80">
+          <Loader2 size={16} className="animate-spin text-brand-neon" />
+          Updating...
+        </div>
+      )}
       <div className="flex gap-3">
         {/* Product Image */}
         {image && (
@@ -129,7 +136,11 @@ function CartLineQuantity({line}: {line: CartLine}) {
           <Minus size={14} />
         </button>
       </CartLineUpdateButton>
-      <span className="w-8 text-center text-xs font-semibold text-white">
+      <span
+        className="w-8 text-center text-xs font-semibold text-white"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {quantity}
       </span>
       <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>

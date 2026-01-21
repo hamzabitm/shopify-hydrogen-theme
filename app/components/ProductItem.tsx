@@ -241,11 +241,11 @@ export const ProductItem = memo(function ProductItem({
       >
         <div
           className="relative mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-[#0f172a] via-[#0b1220] to-[#0f172a] ring-1 ring-white/10 transition-all duration-500 group-hover:ring-brand-neon/50"
-          style={{width: '100%', maxWidth: 260, aspectRatio: '1 / 1'}}
+          style={{width: '100%', maxWidth: '100%', aspectRatio: '1 / 1'}}
         >
           <div className="absolute inset-x-3 top-3 z-[2] flex items-center justify-between gap-2">
             {subtitle ? (
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold text-white/85 ring-1 ring-white/25 backdrop-blur">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[14px] font-semibold text-white/85 ring-1 ring-white/25 backdrop-blur">
                 {subtitle}
               </span>
             ) : <span />}
@@ -308,12 +308,12 @@ export const ProductItem = memo(function ProductItem({
                   <span className="text-[11px] uppercase tracking-[0.08em] text-white/60">
                     From
                   </span>
-                  <span className="text-[22px] font-extrabold tracking-tight">
+                  <span className="text-[17px] font-extrabold tracking-tight">
                     <Money data={minPrice!} />
                   </span>
                 </span>
               ) : (
-                <span className="text-[22px] font-extrabold tracking-tight">
+                <span className="text-[17px] font-extrabold tracking-tight">
                   <Money data={displayPrice} />
                 </span>
               )

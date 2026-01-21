@@ -55,7 +55,7 @@ export function Header({
               <img 
                 src="https://cdn.shopify.com/s/files/1/0732/3182/7102/files/Genze_Logo.png?v=1760642974" 
                 alt="Genze Logo" 
-                className="h-8 w-40 object-contain group-hover/logo:brightness-110 transition-all duration-200"
+                className="h-9 w-44 object-contain group-hover/logo:brightness-110 transition-all duration-200"
               />
              
             </div>
@@ -116,7 +116,7 @@ export function MegaMenu({
           onClick={close}
           prefetch="intent"
           to="/"
-          className="px-4 py-2 text-sm font-semibold text-white hover:text-brand-neon transition-colors"
+          className="px-4 py-2 text-base font-semibold text-white hover:text-brand-neon transition-colors"
         >
           Home
         </NavLink>
@@ -135,7 +135,7 @@ export function MegaMenu({
             return (
               <div key={item.id}>
                 <NavLink
-                  className="block px-4 py-2 text-sm font-semibold text-white hover:text-brand-neon transition-colors"
+                  className="block px-4 py-2 text-base font-semibold text-white hover:text-brand-neon transition-colors"
                   end
                   onClick={close}
                   prefetch="intent"
@@ -149,13 +149,13 @@ export function MegaMenu({
 
           return (
             <details key={item.id} className="group">
-              <summary className="flex items-center justify-between px-4 py-2 cursor-pointer font-semibold text-white hover:text-brand-neon transition-colors">
+              <summary className="flex items-center justify-between px-4 py-2 cursor-pointer font-semibold text-white text-base hover:text-brand-neon transition-colors">
                 <span>{item.title}</span>
                 <span className="transition-transform group-open:rotate-180">▾</span>
               </summary>
               <div className="flex flex-col gap-1 pl-4 py-1">
                 <NavLink
-                  className="px-4 py-2 text-sm font-semibold text-brand-neon hover:text-brand-neon-light transition-colors"
+                  className="px-4 py-2 text-base font-semibold text-brand-neon hover:text-brand-neon-light transition-colors"
                   end
                   onClick={close}
                   prefetch="intent"
@@ -175,7 +175,7 @@ export function MegaMenu({
                     return (
                       <NavLink
                         key={subitem.id}
-                        className="px-4 py-2 text-sm text-white/70 hover:text-white hover:translate-x-1 transition-all"
+                        className="px-4 py-2 text-base text-white/70 hover:text-white hover:translate-x-1 transition-all"
                         end
                         onClick={close}
                         prefetch="intent"
@@ -221,7 +221,7 @@ export function MegaMenu({
             onMouseLeave={() => setActiveMenu(null)}
           >
             <NavLink
-              className="px-4 py-2 text-sm font-semibold text-white/90 hover:text-brand-neon transition-all duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
+              className="px-4 py-2 text-[15px] sm:text-base font-semibold text-white/90 hover:text-brand-neon transition-all duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black rounded"
               end
               prefetch="intent"
               to={url}
@@ -270,7 +270,7 @@ export function MegaMenu({
                               <NavLink
                                 to={subUrl}
                                 prefetch="intent"
-                                className="px-2 py-1.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded transition-all duration-150 block"
+                                className="px-2 py-1.5 text-[15px] text-white/80 hover:text-white hover:bg-white/10 rounded transition-all duration-150 block"
                               >
                                 {subitem.title}
                               </NavLink>
@@ -299,7 +299,7 @@ export function MegaMenu({
                                 <NavLink
                                   to={subUrl}
                                   prefetch="intent"
-                                  className="px-2 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded transition-all duration-150 block"
+                                  className="px-2 py-1.5 text-[15px] text-white/70 hover:text-white hover:bg-white/10 rounded transition-all duration-150 block"
                                 >
                                   {subitem.title}
                                 </NavLink>
@@ -417,7 +417,7 @@ function HeaderCtas({
       <NavLink 
         prefetch="intent" 
         to="/account" 
-        className="hidden sm:flex h-10 px-3 rounded-lg items-center text-sm font-semibold text-white/90 hover:text-brand-neon hover:bg-white/10 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60"
+        className="hidden sm:flex h-10 px-3 rounded-lg items-center text-[15px] font-semibold text-white/90 hover:text-brand-neon hover:bg-white/10 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-neon/60"
       >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
